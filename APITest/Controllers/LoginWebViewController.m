@@ -6,19 +6,20 @@
 //  Copyright © 2016 Galiev Danil. All rights reserved.
 //
 
-#import "LoginLogicController.h"
+#import "LoginWebViewController.h"
 #import "AccessToken.h"
 #import "ServerManager.h"
 
 
-@interface LoginLogicController () <UIWebViewDelegate>
+@interface LoginWebViewController () <UIWebViewDelegate>
 
 @property (copy, nonatomic) LoginCompletionBlock completionBlock;
 @property (weak, nonatomic) UIWebView* webView;
+@property (assign, nonatomic) BOOL firstLaunchTrigger;
 
 @end
 
-@implementation LoginLogicController
+@implementation LoginWebViewController
 
 - (id) initWithCompletionBlock:(LoginCompletionBlock) completionBlock
 {
@@ -70,7 +71,8 @@
     webView.delegate = self;
     
     [webView loadRequest:request];
-    
+
+    self.firstLaunchTrigger = YES;
     
 
 }
@@ -94,45 +96,47 @@
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
-    if ([[[request URL] description] rangeOfString:@"#access_token"].location != NSNotFound) {      //:@"https://oauth.vk.com/blank.html"]) {
-        
-        AccessToken* token = [[AccessToken alloc] init];
-        
-        NSString* query = [[request URL] description];
-        
-        NSArray* array = [query componentsSeparatedByString:@"#"];
-        
-        if ([array count] > 1) {
-            query = [array lastObject];
-        }
-        
-        NSArray* pairs = [query componentsSeparatedByString:@"&"];
-        
-        for (NSString* pair in  pairs) {
+        if ([[[request URL] description] rangeOfString:@"#access_token"].location != NSNotFound) {
             
-            NSArray* values = [pair componentsSeparatedByString:@"="];
-            
-            if ([values count] == 2) {
-                
-                NSString* key = [values firstObject];
-                
-                if ([key isEqualToString:@"access_token"]) {
-                    token.token = [values lastObject];
-                } else if ([key isEqualToString:@"expires_in"]) {
-                    
-                    NSTimeInterval interval = [[values lastObject] doubleValue];
-                    
-                    token.expirationDate = [NSDate dateWithTimeIntervalSinceNow:interval];
-                } else if ([key isEqualToString:@"user_id"]) {
-                    
-                    token.userID = [values lastObject];
-                }
-
+            AccessToken* token = [[AccessToken alloc] init];
+    
+            NSString* query = [[request URL] description];
+    
+            NSArray* array = [query componentsSeparatedByString:@"#"];
+    
+            if ([array count] > 1) {
+                query = [array lastObject];
             }
-        }
-        
+    
+            NSArray* pairs = [query componentsSeparatedByString:@"&"];
+    
+            for (NSString* pair in  pairs) {
+    
+                NSArray* values = [pair componentsSeparatedByString:@"="];
+    
+                if ([values count] == 2) {
+    
+                    NSString* key = [values firstObject];
+    
+                    if ([key isEqualToString:@"access_token"]) {
+                        token.token = [values lastObject];
+                    } else if ([key isEqualToString:@"expires_in"]) {
+    
+                        NSTimeInterval interval = [[values lastObject] doubleValue];
+    
+                        token.expirationDate = [NSDate dateWithTimeIntervalSinceNow:interval];
+                    } else if ([key isEqualToString:@"user_id"]) {
+    
+                        token.userID = [values lastObject];
+                    }
+    
+                }
+            }
+
+
         self.webView.delegate = nil;
-        
+            
+
         if (self.completionBlock) {
             self.completionBlock(token);
         }
@@ -140,7 +144,7 @@
         
        [self dismissViewControllerAnimated:YES
                                  completion:nil];
-        
+
         
         
  
@@ -153,7 +157,7 @@
     
     
     NSLog(@" request = = = %@",request);
-    
+
     
 
     
@@ -168,6 +172,8 @@
 - (void) dealloc
 {
     self.webView.delegate = nil;
+
+    NSLog(@"WebViewController dealloceted");
 }
 
 

@@ -6,7 +6,7 @@
 //  Copyright © 2016 Galiev Danil. All rights reserved.
 
 
-#import "ViewController.h"
+#import "ShowFriendsController.h"
 #import "ServerManager.h"
 #import "User.h"
 #import "UIImageView+AFNetworking.h"
@@ -14,14 +14,14 @@
 
 
 
-@interface ViewController ()
+@interface ShowFriendsController ()
 
 @property (strong, nonatomic) NSMutableArray* friendsArray;
 @property (strong, nonatomic) NSString* selectedUserId;
 
 @end
 
-@implementation ViewController
+@implementation ShowFriendsController
 
 static NSInteger friendsInRequest = 20;
 

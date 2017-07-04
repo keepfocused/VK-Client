@@ -16,12 +16,12 @@
 		847A27441DC8D3D000F27684 /* AccessToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 847A27431DC8D3D000F27684 /* AccessToken.m */; };
 		848121821DD4823200ACF8F8 /* LoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = 848121811DD4823200ACF8F8 /* LoginController.m */; };
 		848121851DD483FB00ACF8F8 /* NewsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 848121841DD483FB00ACF8F8 /* NewsController.m */; };
-		848121881DD4858F00ACF8F8 /* LoginLogicController.m in Sources */ = {isa = PBXBuildFile; fileRef = 848121871DD4858F00ACF8F8 /* LoginLogicController.m */; };
+		848121881DD4858F00ACF8F8 /* LoginWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 848121871DD4858F00ACF8F8 /* LoginWebViewController.m */; };
 		8489200E1D95117400B10827 /* ShowFriendDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8489200D1D95117400B10827 /* ShowFriendDetailController.m */; };
 		848920111D953BFE00B10827 /* UserDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = 848920101D953BFE00B10827 /* UserDetails.m */; };
 		848BEF701D8A91FA00FF755B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 848BEF6F1D8A91FA00FF755B /* main.m */; };
 		848BEF731D8A91FA00FF755B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 848BEF721D8A91FA00FF755B /* AppDelegate.m */; };
-		848BEF761D8A91FA00FF755B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 848BEF751D8A91FA00FF755B /* ViewController.m */; };
+		848BEF761D8A91FA00FF755B /* ShowFriendsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 848BEF751D8A91FA00FF755B /* ShowFriendsController.m */; };
 		848BEF791D8A91FA00FF755B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 848BEF771D8A91FA00FF755B /* Main.storyboard */; };
 		848BEF7B1D8A91FA00FF755B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 848BEF7A1D8A91FA00FF755B /* Assets.xcassets */; };
 		848BEF891D8A985100FF755B /* ServerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 848BEF881D8A985100FF755B /* ServerManager.m */; };
@@ -65,8 +65,8 @@
 		848121811DD4823200ACF8F8 /* LoginController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginController.m; path = Controllers/LoginController.m; sourceTree = "<group>"; };
 		848121831DD483FB00ACF8F8 /* NewsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewsController.h; path = Controllers/NewsController.h; sourceTree = "<group>"; };
 		848121841DD483FB00ACF8F8 /* NewsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NewsController.m; path = Controllers/NewsController.m; sourceTree = "<group>"; };
-		848121861DD4858F00ACF8F8 /* LoginLogicController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginLogicController.h; path = Controllers/LoginLogicController.h; sourceTree = "<group>"; };
-		848121871DD4858F00ACF8F8 /* LoginLogicController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginLogicController.m; path = Controllers/LoginLogicController.m; sourceTree = "<group>"; };
+		848121861DD4858F00ACF8F8 /* LoginWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginWebViewController.h; path = Controllers/LoginWebViewController.h; sourceTree = "<group>"; };
+		848121871DD4858F00ACF8F8 /* LoginWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginWebViewController.m; path = Controllers/LoginWebViewController.m; sourceTree = "<group>"; };
 		8489200C1D95117400B10827 /* ShowFriendDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShowFriendDetailController.h; path = Controllers/ShowFriendDetailController.h; sourceTree = "<group>"; };
 		8489200D1D95117400B10827 /* ShowFriendDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ShowFriendDetailController.m; path = Controllers/ShowFriendDetailController.m; sourceTree = "<group>"; };
 		8489200F1D953BFE00B10827 /* UserDetails.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserDetails.h; path = Model/UserDetails.h; sourceTree = "<group>"; };
@@ -75,8 +75,8 @@
 		848BEF6F1D8A91FA00FF755B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		848BEF711D8A91FA00FF755B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		848BEF721D8A91FA00FF755B /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		848BEF741D8A91FA00FF755B /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ViewController.h; path = Controllers/ViewController.h; sourceTree = "<group>"; };
-		848BEF751D8A91FA00FF755B /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = ViewController.m; path = Controllers/ViewController.m; sourceTree = "<group>"; };
+		848BEF741D8A91FA00FF755B /* ShowFriendsController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ShowFriendsController.h; path = Controllers/ShowFriendsController.h; sourceTree = "<group>"; };
+		848BEF751D8A91FA00FF755B /* ShowFriendsController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = ShowFriendsController.m; path = Controllers/ShowFriendsController.m; sourceTree = "<group>"; };
 		848BEF781D8A91FA00FF755B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		848BEF7A1D8A91FA00FF755B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		848BEF7F1D8A91FA00FF755B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -160,8 +160,8 @@
 		848920121D95419800B10827 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				848BEF741D8A91FA00FF755B /* ViewController.h */,
-				848BEF751D8A91FA00FF755B /* ViewController.m */,
+				848BEF741D8A91FA00FF755B /* ShowFriendsController.h */,
+				848BEF751D8A91FA00FF755B /* ShowFriendsController.m */,
 				8489200C1D95117400B10827 /* ShowFriendDetailController.h */,
 				8489200D1D95117400B10827 /* ShowFriendDetailController.m */,
 				844DB36E1D9AB5F5002AA6F7 /* ShowSubscribtionController.h */,
@@ -170,8 +170,8 @@
 				844DB3721D9AB637002AA6F7 /* ShowFollowersController.m */,
 				848121801DD4823200ACF8F8 /* LoginController.h */,
 				848121811DD4823200ACF8F8 /* LoginController.m */,
-				848121861DD4858F00ACF8F8 /* LoginLogicController.h */,
-				848121871DD4858F00ACF8F8 /* LoginLogicController.m */,
+				848121861DD4858F00ACF8F8 /* LoginWebViewController.h */,
+				848121871DD4858F00ACF8F8 /* LoginWebViewController.m */,
 				848121831DD483FB00ACF8F8 /* NewsController.h */,
 				848121841DD483FB00ACF8F8 /* NewsController.m */,
 			);
@@ -365,7 +365,7 @@
 				845B8B211DD0CDAC00A130B8 /* NewsFeedPost.m in Sources */,
 				84D36FEA1D8FD43B00097FB1 /* AFURLResponseSerialization.m in Sources */,
 				848BEF891D8A985100FF755B /* ServerManager.m in Sources */,
-				848BEF761D8A91FA00FF755B /* ViewController.m in Sources */,
+				848BEF761D8A91FA00FF755B /* ShowFriendsController.m in Sources */,
 				84D36FE61D8FD43B00097FB1 /* AFHTTPSessionManager.m in Sources */,
 				84FD90B61DA7F92D00E48647 /* WallPostCell.m in Sources */,
 				844DB3761D9AC041002AA6F7 /* Follower.m in Sources */,
@@ -390,7 +390,7 @@
 				84D36FF41D8FD43B00097FB1 /* UIWebView+AFNetworking.m in Sources */,
 				84D36FE91D8FD43B00097FB1 /* AFURLRequestSerialization.m in Sources */,
 				844DB3701D9AB5F5002AA6F7 /* ShowSubscribtionController.m in Sources */,
-				848121881DD4858F00ACF8F8 /* LoginLogicController.m in Sources */,
+				848121881DD4858F00ACF8F8 /* LoginWebViewController.m in Sources */,
 				84FD90B91DA7F9D800E48647 /* Wall.m in Sources */,
 				84D36FEC1D8FD43B00097FB1 /* AFAutoPurgingImageCache.m in Sources */,
 				84D36FED1D8FD43B00097FB1 /* AFImageDownloader.m in Sources */,

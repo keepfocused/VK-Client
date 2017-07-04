@@ -10,7 +10,7 @@
 #import "AFNetworking.h"
 #import "User.h"
 #import "UserDetails.h"
-#import "LoginLogicController.h"
+#import "LoginWebViewController.h"
 
 @interface ServerManager : NSObject
 
@@ -57,6 +57,10 @@
             nextFrom:(NSString*)nextFromArgument
            onSuccess:(void (^) (NSDictionary *feedPosts)) success
            onFailure:(void (^) (NSError *error)) failure;
+
+- (void) clearAllCookies;
+
+
 
 
 

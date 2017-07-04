@@ -19,6 +19,7 @@
 @property (strong, nonatomic) AFHTTPSessionManager* sessionManager;
 @property (strong, nonatomic) AccessToken* accessToken;
 @property (assign, nonatomic) NSInteger tempCount;
+@property (assign, nonatomic) BOOL logout;
 
 
 @end
@@ -428,7 +429,7 @@
 
 - (void) authorizeUser:(void (^)(User *))completion
 {
-    LoginLogicController* vc = [[LoginLogicController alloc] initWithCompletionBlock:^(AccessToken *token) {
+    LoginWebViewController* vc = [[LoginWebViewController alloc] initWithCompletionBlock:^(AccessToken *token) {
         self.accessToken = token;
         self.userId = token.userID;
         NSLog(@"server manager userID = %@", self.userId);
@@ -437,15 +438,22 @@
             completion(nil);
         }
     }];
-    
+
     UINavigationController* nav = [[UINavigationController alloc] initWithRootViewController:vc];
-    
+
     UIViewController* mainVC = [[[UIApplication sharedApplication]windows] firstObject].rootViewController;
-    
+
     [mainVC presentViewController:nav
                          animated:YES
                        completion:nil];
 
+}
+
+- (void) clearAllCookies {
+    NSHTTPCookieStorage *cookieStorage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+    for (NSHTTPCookie *each in cookieStorage.cookies) {
+        [cookieStorage deleteCookie:each];
+    }
 }
 
 @end

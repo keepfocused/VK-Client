@@ -16,13 +16,14 @@
 #define DELTA_LABEL 65
 #define DELTA_SCALE 0.8f
 
-@interface NewsController ()
+@interface NewsController () <UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate>
 
 @property (strong, nonatomic) NSMutableArray* newsFeedPostsArray;
 @property (strong, nonatomic) NSString* nextFromString;
 @property (strong, nonatomic) UIImage* tempImage;
 @property (strong, nonatomic) NSMutableArray* heightOfLikeCount;
 @property (strong, nonatomic) NSString* myId;
+@property (assign, nonatomic) BOOL loadingData;
 
 
 
@@ -44,7 +45,7 @@ static NSInteger newsFeedInRequest = 10;
     self.myId = [[ServerManager sharedManager] userId];
 
 
-
+    self.loadingData = YES;
     [self getNewsFeed];
 
 
@@ -90,34 +91,34 @@ static NSInteger newsFeedInRequest = 10;
              [self.tableView beginUpdates];
              [self.tableView insertRowsAtIndexPaths:newPaths withRowAnimation:UITableViewRowAnimationTop];
              [self.tableView endUpdates];
+             self.loadingData = NO;
          }
      }
      onFailure:^(NSError *error) {
          NSLog(@"News feed getting failure");
      }];
+
+//    NSLog(@" NSUserDefaultsData = %@ ", [[NSUserDefaults standardUserDefaults] dictionaryRepresentation]);
+//
+//    NSHTTPCookie *cookie;
+//    NSHTTPCookieStorage *cookieJar = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+//    for (cookie in [cookieJar cookies]) {
+//        NSLog(@"NSHTTPCookie = %@", cookie);
+//    }
 }
 
-- (void) setCountAndPicture:(UIView *)container iconOfLabel:(NSString *)picture countValue:(NSString *)count
-{
-    for (UIView* view in [container subviews]) {
+#pragma mark - UIScrollViewDelegate
 
-        if ([view isKindOfClass:[UIImageView class]]) {
-            UIImageView* tempView = (UIImageView*)view;
-            tempView.image = [UIImage imageNamed:picture];
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
 
-        }
-
-        if ([view isKindOfClass:[UILabel class]]) {
-            UILabel* tempLabel = (UILabel *)view;
-            tempLabel.text = [NSString stringWithFormat:@"%@", count];
+    if ((scrollView.contentOffset.y + scrollView.frame.size.height) >= scrollView.contentSize.height) {
+        if (!self.loadingData)
+        {
+            self.loadingData = YES;
+            [self getNewsFeed];
         }
     }
-
-
-
 }
-
-
 
 #pragma mark UITableViewDataSource
 
@@ -135,7 +136,7 @@ static NSInteger newsFeedInRequest = 10;
     
     if (section == 1) {
         
-        return [self.newsFeedPostsArray count] + 1;
+        return [self.newsFeedPostsArray count]; //+ 1;
 
     }
     
@@ -280,29 +281,9 @@ static NSInteger newsFeedInRequest = 10;
 
             
             return newsCell;
-            
         }
-
     }
-    
-    if (indexPath.section == 1 && indexPath.row == [self.newsFeedPostsArray count]) {
 
-
-        UITableViewCell* cell = [[UITableViewCell alloc] init];
-
-        
-        for (UIView* __strong view in cell.subviews) {
-            
-            view = nil;
-        }
-        
-        cell.textLabel.text = @"LOAD MORE";
-        cell.backgroundColor = [UIColor colorWithRed:0.19 green:0.71 blue:0.58 alpha:1.0];
-        cell.imageView.image = nil;
-        
-        return cell;
-    }
-    
     return nil;
     
 }
@@ -313,12 +294,7 @@ static NSInteger newsFeedInRequest = 10;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
-    
-    if (indexPath.section == 1 && indexPath.row == [self.newsFeedPostsArray count]) {
 
-        [self getNewsFeed];
-    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -346,7 +322,34 @@ static NSInteger newsFeedInRequest = 10;
     return 0;
 }
 
+#pragma mark - Actions
 
+- (IBAction)logoutAction:(UIButton *)sender {
+
+    [[ServerManager sharedManager] clearAllCookies];
+
+}
+
+
+- (void) setCountAndPicture:(UIView *)container iconOfLabel:(NSString *)picture countValue:(NSString *)count
+{
+    for (UIView* view in [container subviews]) {
+
+        if ([view isKindOfClass:[UIImageView class]]) {
+            UIImageView* tempView = (UIImageView*)view;
+            tempView.image = [UIImage imageNamed:picture];
+
+        }
+
+        if ([view isKindOfClass:[UILabel class]]) {
+            UILabel* tempLabel = (UILabel *)view;
+            tempLabel.text = [NSString stringWithFormat:@"%@", count];
+        }
+    }
+    
+    
+    
+}
 
 #pragma mark - Segue
 
@@ -356,8 +359,6 @@ static NSInteger newsFeedInRequest = 10;
 
         ShowFriendDetailController* vc = segue.destinationViewController;
         vc.user_id = self.myId;
-
-
     }
 
 }

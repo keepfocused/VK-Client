@@ -12,7 +12,7 @@
 
 typedef void(^LoginCompletionBlock)(AccessToken* token);
 
-@interface LoginLogicController : UIViewController
+@interface LoginWebViewController : UIViewController
 
 
 - (id) initWithCompletionBlock:(LoginCompletionBlock) completionBlock;
