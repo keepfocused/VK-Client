@@ -11,6 +11,7 @@
 
 
 #import "NewsFeedPost.h"
+#import "UIImageView+AFNetworking.h"
 
 @implementation NewsFeedPost
 
@@ -76,6 +77,63 @@
                 
    
             }
+            
+            
+            NSLog(@"URL = %@", self.postImageURL);
+
+            
+            NSURLRequest* postImageRequest = [NSURLRequest requestWithURL:self.postImageURL];
+            
+            NSLog(@"URL request = %@", postImageRequest);
+            
+            self.postPhoto = [[UIImageView alloc] init];
+            
+            UIImageView* tempImageView = self.postPhoto;
+            
+            NSLog(@"self postPhoto before block = %@", self.postPhoto);
+            NSLog(@"tempImageView = %@", tempImageView);
+        
+            
+
+
+            
+            [tempImageView
+             setImageWithURLRequest:postImageRequest
+             placeholderImage:nil
+             success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+                 
+
+                 self.postPhoto.image = image;
+                 
+                 NSLog(@"image in block = %@", image);
+                 
+                 NSLog(@"postPhoto in block = %@", self.postPhoto);
+                 
+                 
+
+                 
+                 
+                 /*
+                 UIImage *bgImage = [UIImage imageNamed:@"Default@2x.png"];
+                 UIImageView *backgroundImageView = [[UIImageView alloc] initWithImage:bgImage];
+                 */
+
+
+                 
+             } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+                 NSLog(@"Getting postOwner image failed");
+             }];
+            
+            self.postPhoto = tempImageView;
+            
+            if (self.postPhoto == nil) {
+                
+                NSLog(@"RAVNO NIIIIIL");
+                
+            
+            } else NSLog(@"VIEW EXIST");
+            
+
             
 
             

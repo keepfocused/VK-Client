@@ -27,17 +27,17 @@
 
 
 
+
 @end
 
 @implementation NewsController
 
-static NSInteger newsFeedInRequest = 10;
+static NSInteger newsFeedInRequest = 1;
 
 #pragma mark - Life Cycle
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
     
     self.newsFeedPostsArray = [NSMutableArray array];
     self.heightOfLikeCount  = [NSMutableArray array];
@@ -60,6 +60,8 @@ static NSInteger newsFeedInRequest = 10;
 
 - (void) getNewsFeed
 {
+
+    
     [[ServerManager sharedManager]
      getNewsFeed:newsFeedInRequest
      nextFrom:self.nextFromString
@@ -79,6 +81,8 @@ static NSInteger newsFeedInRequest = 10;
 
          //Animation
          
+
+         
          NSMutableArray* newPaths = [NSMutableArray array];
          
          for (int i = (int)[self.newsFeedPostsArray count] - count; i < [self.newsFeedPostsArray count]; i++) {
@@ -87,29 +91,29 @@ static NSInteger newsFeedInRequest = 10;
          }
 
          if ([postsArray count] > 0) {
+             
+
 
              [self.tableView beginUpdates];
              [self.tableView insertRowsAtIndexPaths:newPaths withRowAnimation:UITableViewRowAnimationTop];
              [self.tableView endUpdates];
              self.loadingData = NO;
+
          }
+         
+         [self.tableView reloadData];
+
      }
      onFailure:^(NSError *error) {
          NSLog(@"News feed getting failure");
      }];
-
-//    NSLog(@" NSUserDefaultsData = %@ ", [[NSUserDefaults standardUserDefaults] dictionaryRepresentation]);
-//
-//    NSHTTPCookie *cookie;
-//    NSHTTPCookieStorage *cookieJar = [NSHTTPCookieStorage sharedHTTPCookieStorage];
-//    for (cookie in [cookieJar cookies]) {
-//        NSLog(@"NSHTTPCookie = %@", cookie);
-//    }
 }
 
 #pragma mark - UIScrollViewDelegate
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    
+
 
     if ((scrollView.contentOffset.y + scrollView.frame.size.height) >= scrollView.contentSize.height) {
         if (!self.loadingData)
@@ -123,11 +127,13 @@ static NSInteger newsFeedInRequest = 10;
 #pragma mark UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    
 
     return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+
 
     
     if (section == 0) {
@@ -153,6 +159,8 @@ static NSInteger newsFeedInRequest = 10;
     
     if (indexPath.section == 0) {
         
+
+        
         UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:topSideIdentifier];
         
         if (!cell) {
@@ -167,10 +175,14 @@ static NSInteger newsFeedInRequest = 10;
     if (indexPath.section == 1 && indexPath.row < [self.newsFeedPostsArray count]) {
 
 
+
         if ([self.newsFeedPostsArray count] > 0) {
 
 
             NewsFeedCell *newsCell = [tableView dequeueReusableCellWithIdentifier:newsFeedIdentifier];
+            NSIndexPath* rowToReload = indexPath;
+            NSMutableArray* rowsToReload = [NSMutableArray arrayWithObjects:rowToReload, nil];
+            
 
 
             if (!newsCell) {
@@ -203,11 +215,41 @@ static NSInteger newsFeedInRequest = 10;
 
 
             // Obtain and handling post image
+            
+            if (newsCell.imageView == nil) {
+                NSLog(@"newsCell imageView nil");
+            } else NSLog(@"NOT NIL = %@", newsCell.postImageView);
+            
+            if (singlePost.postPhoto == nil) {
+                NSLog(@"singlePost imageVIew nil");
+            } else NSLog(@"Not nil singlePost = %@",singlePost.postPhoto);
+            
+            
 
             NSURLRequest* requestPostImage = [NSURLRequest requestWithURL:singlePost.postImageURL];
 
             NewsFeedCell* weakCell = newsCell;
             newsCell.postImageView.image = nil;
+            
+            
+            
+            newsCell.postImageView.image = singlePost.postPhoto.image;
+            //newsCell.postImageView.backgroundColor = [UIColor redColor];
+
+            
+            NSLog(@"AFTER assignment");
+            
+            
+            if (newsCell.imageView == nil) {
+                NSLog(@"newsCell imageView nil");
+            } else NSLog(@"NOT NIL = %@", newsCell.postImageView);
+            
+            if (singlePost.postPhoto == nil) {
+                NSLog(@"singlePost imageVIew nil");
+            } else NSLog(@"Not nil singlePost = %@",singlePost.postPhoto);
+            
+            
+            /*
 
             [newsCell.imageView
              setImageWithURLRequest:requestPostImage
@@ -244,6 +286,7 @@ static NSInteger newsFeedInRequest = 10;
                  NSLog(@"Getting imageView in tableView failure");
                  
              }];
+            */
 
 
             // Obtain post owner image
@@ -283,6 +326,8 @@ static NSInteger newsFeedInRequest = 10;
             return newsCell;
         }
     }
+    
+
 
     return nil;
     
@@ -293,12 +338,14 @@ static NSInteger newsFeedInRequest = 10;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+
     if (indexPath.section == 0) {
         
         return 182;
@@ -333,6 +380,8 @@ static NSInteger newsFeedInRequest = 10;
 
 - (void) setCountAndPicture:(UIView *)container iconOfLabel:(NSString *)picture countValue:(NSString *)count
 {
+
+    
     for (UIView* view in [container subviews]) {
 
         if ([view isKindOfClass:[UIImageView class]]) {

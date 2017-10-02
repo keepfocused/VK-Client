@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <UIKit/UIView.h>
+#import <UIKit/UIImageView.h>
 
 @interface NewsFeedPost : NSObject
 
@@ -18,8 +18,8 @@
 @property (strong, nonatomic) NSString *textPost;
 @property (strong, nonatomic) NSURL *postImageURL;
 @property (strong, nonatomic) NSURL *ownerImageURL;
-@property (strong, nonatomic) UIImage *ownerPhoto;
-@property (strong, nonatomic) UIImage *postPhoto;
+@property (strong, nonatomic) UIImageView *ownerPhoto;
+@property (strong, nonatomic) UIImageView *postPhoto;
 @property (strong, nonatomic) NSMutableArray *photosArray;
 
 
